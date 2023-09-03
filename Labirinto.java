@@ -8,6 +8,8 @@ public class Labirinto {
     private int largura;
     private int altura;
     private Grafo grafo;
+    private int entrada; // índice único para a entrada
+    private int saida;   // índice único para a saída
 
     public Labirinto(String mapaLabirinto) throws IOException {
         LinkedList<String> linhas = new LinkedList<>();
@@ -33,9 +35,19 @@ public class Labirinto {
         for (int y = 0; y < altura; y++) {
             linha = linhas.get(y);
             for (int x = 0; x < largura; x++) {
-                matrizLabirinto[y][x] = Character.getNumericValue(linha.charAt(x));
+                char currentChar = linha.charAt(x);
+                if (currentChar == 'E') {
+                    entrada = toSingleIndex(y, x);
+                    matrizLabirinto[y][x] = 0; // trata 'E' como caminho
+                } else if (currentChar == 'S') {
+                    saida = toSingleIndex(y, x);
+                    matrizLabirinto[y][x] = 0; // trata 'S' como caminho
+                } else {
+                    matrizLabirinto[y][x] = Character.getNumericValue(currentChar);
+                }
             }
         }
+    
 
         construirGrafo();
     }
@@ -61,10 +73,10 @@ public class Labirinto {
         return y * largura + x;
     }
 
-    public LinkedList<Integer> encontrarCaminhoSaida(int entrada, int saida) {
+    public LinkedList<Integer> encontrarCaminhoSaida() {
         boolean[] visitado = new boolean[largura * altura];
         LinkedList<Integer> caminho = new LinkedList<>();
-        dfs(entrada, saida, visitado, caminho);
+        dfs(entrada, saida, visitado, caminho);  // agora usando entrada e saída diretamente
         return caminho;
     }
 
