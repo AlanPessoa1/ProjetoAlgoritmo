@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,7 +19,13 @@ public class VisualizadorLabirinto extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        labirinto = new Labirinto(20, 20);  // Criando um labirinto de 20x20 
+        try {
+        labirinto = new Labirinto("mapaLabirinto.txt");
+    } catch(IOException e) {
+    // Tratar erro de leitura aqui
+    System.err.println("Erro ao carregar o labirinto.");
+    e.printStackTrace();
+    return;} 
 
         for (int y = 0; y < labirinto.obterAltura(); y++) {
             for (int x = 0; x < labirinto.obterLargura(); x++) {
