@@ -17,7 +17,7 @@ public class VisualizadorLabirinto extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        labirinto = new Labirinto(20, 20);  // Criando um labirinto de 20x20 por exemplo
+        labirinto = new Labirinto(20, 20);  // Criando um labirinto de 20x20 
 
         for (int y = 0; y < labirinto.obterAltura(); y++) {
             for (int x = 0; x < labirinto.obterLargura(); x++) {

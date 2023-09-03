@@ -8,11 +8,11 @@ public class Labirinto {
     private int largura;
     private int altura;
 
-    public Labirinto(String nomeArquivo) throws IOException {
+    public Labirinto(String mapaLabirinto) throws IOException {
         LinkedList<String> linhas = new LinkedList<>();
         String linha; // Declarando 'linha' aqui
     
-        try (BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo))) {
+        try (BufferedReader leitor = new BufferedReader(new FileReader(mapaLabirinto))) {
             while ((linha = leitor.readLine()) != null) {
                 linhas.add(linha);
             }
