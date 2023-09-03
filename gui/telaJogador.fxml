@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaJogadorController">
+   <right>
+      <BorderPane prefHeight="627.0" prefWidth="115.0" BorderPane.alignment="CENTER">
+         <top>
+            <Button fx:id="btnMoverCima" mnemonicParsing="false" onAction="#moverPraCima" text="W" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <Button fx:id="btnMoverBaixo" mnemonicParsing="false" onAction="#moverPraBaixo" text="S" BorderPane.alignment="CENTER" />
+         </bottom>
+         <left>
+            <Button fx:id="btnMoverEsquerda" mnemonicParsing="false" onAction="#moverPraEsquerda" text="A" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Button fx:id="btnMoverDireita" mnemonicParsing="false" onAction="#moverPraDireita" text="D" BorderPane.alignment="CENTER" />
+         </right>
+         <padding>
+            <Insets bottom="250.0" top="300.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets right="15.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </right>
+</BorderPane>
