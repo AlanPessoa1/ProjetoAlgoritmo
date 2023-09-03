@@ -7,10 +7,11 @@ public class Labirinto {
     private int[][] matrizLabirinto;
     private int largura;
     private int altura;
+    private Grafo grafo;
 
     public Labirinto(String mapaLabirinto) throws IOException {
         LinkedList<String> linhas = new LinkedList<>();
-        String linha; // Declarando 'linha' aqui
+        String linha;
     
         try (BufferedReader leitor = new BufferedReader(new FileReader(mapaLabirinto))) {
             while ((linha = leitor.readLine()) != null) {
@@ -30,11 +31,66 @@ public class Labirinto {
         matrizLabirinto = new int[altura][largura];
     
         for (int y = 0; y < altura; y++) {
-            linha = linhas.get(y); // Usando 'linha' aqui
+            linha = linhas.get(y);
             for (int x = 0; x < largura; x++) {
                 matrizLabirinto[y][x] = Character.getNumericValue(linha.charAt(x));
             }
         }
+
+        construirGrafo();
+    }
+
+    private void construirGrafo() {
+        grafo = new Grafo(largura * altura);
+
+        for (int y = 0; y < altura; y++) {
+            for (int x = 0; x < largura; x++) {
+                if (matrizLabirinto[y][x] == 0) {
+                    int v = toSingleIndex(y, x);
+
+                    if (y > 0 && matrizLabirinto[y - 1][x] == 0) grafo.adicionaAresta(v, toSingleIndex(y - 1, x));
+                    if (y < altura - 1 && matrizLabirinto[y + 1][x] == 0) grafo.adicionaAresta(v, toSingleIndex(y + 1, x));
+                    if (x > 0 && matrizLabirinto[y][x - 1] == 0) grafo.adicionaAresta(v, toSingleIndex(y, x - 1));
+                    if (x < largura - 1 && matrizLabirinto[y][x + 1] == 0) grafo.adicionaAresta(v, toSingleIndex(y, x + 1));
+                }
+            }
+        }
+    }
+
+    private int toSingleIndex(int y, int x) {
+        return y * largura + x;
+    }
+
+    public LinkedList<Integer> encontrarCaminhoSaida(int entrada, int saida) {
+        boolean[] visitado = new boolean[largura * altura];
+        LinkedList<Integer> caminho = new LinkedList<>();
+        dfs(entrada, saida, visitado, caminho);
+        return caminho;
+    }
+
+    public void alternarCelula(int x, int y) {
+        if (matrizLabirinto[y][x] == 0) {
+            matrizLabirinto[y][x] = 1;
+        } else {
+            matrizLabirinto[y][x] = 0;
+        }
+    }
+
+    private boolean dfs(int atual, int saida, boolean[] visitado, LinkedList<Integer> caminho) {
+        if (atual == saida) {
+            caminho.add(atual);
+            return true;
+        }
+
+        visitado[atual] = true;
+        for (int v : grafo.getAdjVertices(atual)) {
+            if (!visitado[v] && dfs(v, saida, visitado, caminho)) {
+                caminho.add(atual);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public int[][] obterLabirinto() {
