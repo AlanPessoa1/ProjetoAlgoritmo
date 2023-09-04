@@ -1,20 +1,21 @@
-public class ResolvedorLabirinto {
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ResolvedorLabirintoBFS {
     private Labirinto labirinto;
     private Grafo grafo;
 
-
     // Construtor que aceita um objeto Labirinto e inicializa o grafo.
-    public ResolvedorLabirinto(Labirinto labirinto) {
+    public ResolvedorLabirintoBFS(Labirinto labirinto) {
         this.labirinto = labirinto;
         this.grafo = new Grafo(labirinto.obterLargura() * labirinto.obterAltura());
         converterLabirintoEmGrafo();
     }
 
-    
     //Converte o labirinto em um grafo.
     private void converterLabirintoEmGrafo() {
         int[][] matriz = labirinto.obterLabirinto();
-        
+
         for (int y = 0; y < labirinto.obterAltura(); y++) {
             for (int x = 0; x < labirinto.obterLargura(); x++) {
                 if (matriz[y][x] == 0) { // Se é um caminho
@@ -38,40 +39,37 @@ public class ResolvedorLabirinto {
         }
     }
 
-    
-    // Algoritmo de busca em profundidade (DFS) para encontrar um caminho.
-    public boolean DFS(int inicio, int fim) {
+    // Algoritmo de busca em largura (BFS) para encontrar um caminho.
+    public boolean BFS(int inicio, int fim) {
         boolean[] visitados = new boolean[labirinto.obterLargura() * labirinto.obterAltura()];
-        return DFSUtil(inicio, fim, visitados);
-    }
+        Queue<Integer> fila = new LinkedList<>();
+        
+        visitados[inicio] = true;
+        fila.add(inicio);
+        
+        while (!fila.isEmpty()) {
+            int vertice = fila.poll();
+            if (vertice == fim) return true;
 
-    
-    // Método recursivo utilizado pelo DFS.
-    private boolean DFSUtil(int vertice, int fim, boolean[] visitados) {
-        if (vertice == fim) return true;
-    
-        visitados[vertice] = true;
-    
-        for (int adj : grafo.getAdjVertices(vertice)) {  // Note que mudamos aqui
-            if (!visitados[adj]) {
-                if (DFSUtil(adj, fim, visitados)) return true;
+            for (int adj : grafo.getAdjVertices(vertice)) {
+                if (!visitados[adj]) {
+                    visitados[adj] = true;
+                    fila.add(adj);
+                }
             }
         }
-    
         return false;
     }
 
-    // Encontra a saída do labirinto.
+    // Encontra a saída do labirinto usando BFS.
     public boolean temCaminhoParaSaida() {
         int inicio = 0;
         int fim = (labirinto.obterAltura() - 1) * labirinto.obterLargura() + labirinto.obterLargura() - 1;
-        return DFS(inicio, fim);
+        return BFS(inicio, fim);
     }
 
-    
-    // Para uso em uma apresentação de console, você pode usar esta função.
+    // Para uso em uma apresentação de console
     public String apresentarResultado() {
         return temCaminhoParaSaida() ? "Caminho encontrado!" : "Não há saída!";
     }
 }
-

@@ -12,16 +12,16 @@ public class Grafo {
             mapa.put(i, new LinkedList<>());
         }
     }
-    // Método original para adicionar um nó baseado em string
+    // Método para adicionar um nó baseado em string
     public void adicionaNo(int no) {
         mapa.putIfAbsent(no, new LinkedList<>());
     }
-    // Método original para adicionar uma aresta entre dois nós baseados em strings
+    // Método para adicionar uma aresta entre dois nós baseados em strings
     public void adicionaAresta(int no1, int no2) {
         mapa.get(no1).add(no2);
         mapa.get(no2).add(no1);
     }
-    // Método original para remover uma aresta entre dois nós
+    // Método para remover uma aresta entre dois nós
     public void removeAresta(int no1, int no2) {
         List<Integer> eV1 = mapa.get(no1);
         List<Integer> eV2 = mapa.get(no2);

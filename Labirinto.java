@@ -73,12 +73,6 @@ public class Labirinto {
         return y * largura + x;
     }
 
-    public LinkedList<Integer> encontrarCaminhoSaida() {
-        boolean[] visitado = new boolean[largura * altura];
-        LinkedList<Integer> caminho = new LinkedList<>();
-        dfs(entrada, saida, visitado, caminho);  // agora usando entrada e saída diretamente
-        return caminho;
-    }
 
     public void alternarCelula(int x, int y) {
         if (matrizLabirinto[y][x] == 0) {
@@ -86,23 +80,6 @@ public class Labirinto {
         } else {
             matrizLabirinto[y][x] = 0;
         }
-    }
-
-    private boolean dfs(int atual, int saida, boolean[] visitado, LinkedList<Integer> caminho) {
-        if (atual == saida) {
-            caminho.add(atual);
-            return true;
-        }
-
-        visitado[atual] = true;
-        for (int v : grafo.getAdjVertices(atual)) {
-            if (!visitado[v] && dfs(v, saida, visitado, caminho)) {
-                caminho.add(atual);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public int[][] obterLabirinto() {
@@ -119,5 +96,13 @@ public class Labirinto {
 
     public int obterAltura() {
         return altura;
+    }
+
+    public int obterEntrada() {
+        return entrada;
+    }
+
+    public int obterSaida() {
+        return saida;
     }
 }
