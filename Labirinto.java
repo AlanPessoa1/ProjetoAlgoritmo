@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Labirinto {
     private int[][] matrizLabirinto;
@@ -72,6 +74,35 @@ public class Labirinto {
     private int toSingleIndex(int y, int x) {
         return y * largura + x;
     }
+
+    public List<Integer> vizinhosConectados(int indice) {
+    int x = indice / largura;
+    int y = indice % largura;
+
+    List<Integer> vizinhos = new ArrayList<>();
+
+    // Vizinho acima
+    if (x > 0 && matrizLabirinto[x-1][y] == 0) {
+        vizinhos.add(toSingleIndex(x-1, y));
+    }
+
+    // Vizinho abaixo
+    if (x < altura - 1 && matrizLabirinto[x+1][y] == 0) {
+        vizinhos.add(toSingleIndex(x+1, y));
+    }
+
+    // Vizinho à esquerda
+    if (y > 0 && matrizLabirinto[x][y-1] == 0) {
+        vizinhos.add(toSingleIndex(x, y-1));
+    }
+
+    // Vizinho à direita
+    if (y < largura - 1 && matrizLabirinto[x][y+1] == 0) {
+        vizinhos.add(toSingleIndex(x, y+1));
+    }
+
+    return vizinhos;
+}
 
 
     public void alternarCelula(int x, int y) {
