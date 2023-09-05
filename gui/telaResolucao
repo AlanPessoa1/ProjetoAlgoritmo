@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaResolucaoController">
+   <bottom>
+      <Button fx:id="btnVoltarTelaInicial" mnemonicParsing="false" onAction="#voltarTelaInicial" text="Voltar pra Tela Inicial" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="15.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <center>
+      <TextArea prefHeight="474.0" prefWidth="335.0" text="E 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1&#10;# 1 1 1 1 1 0 0 1 1 1 0 1 1 1 1 1 1 1 1&#10;# 1 # # # # # 1 # # # # # # # # # # # 1&#10;# # # 1 0 1 # 1 # 1 0 1 1 1 1 1 0 1 # 1&#10;0 1 0 1 0 1 # 1 # 1 0 1 1 1 1 1 0 1 # 1&#10;0 1 0 1 0 0 # # # 1 0 0 0 0 0 0 0 1 # 1&#10;0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 # 1&#10;1 1 0 0 0 0 0 1 0 0 0 1 1 1 0 0 0 0 # 1&#10;0 1 0 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 # 1&#10;0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 1 1 1 # 1&#10;0 1 0 1 0 1 0 1 1 1 1 1 0 1 1 1 1 1 # 1&#10;0 0 0 1 0 1 0 1 0 0 0 1 # # # # # # # 1&#10;0 1 0 1 0 1 0 1 0 # # # # 1 1 1 1 1 1 1&#10;0 1 0 1 0 1 0 1 0 # 0 1 0 0 0 0 0 0 0 1&#10;0 1 0 1 0 1 0 1 1 # 1 1 1 1 1 1 1 1 1 1&#10;0 1 0 1 0 1 0 1 0 # # # # 0 1 1 1 1 0 1&#10;0 1 0 1 0 1 0 1 1 1 1 1 # 1 1 1 1 1 0 1&#10;0 1 0 0 0 0 0 0 0 1 1 1 # # # # # # # 1&#10;0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 # 1&#10;0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 # S" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="15.8" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="25.0" right="46.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </TextArea>
+   </center>
+   <left>
+      <AnchorPane prefHeight="506.0" prefWidth="215.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
