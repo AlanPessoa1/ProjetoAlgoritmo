@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaJogadorController">
    <right>
@@ -28,4 +28,14 @@
          </BorderPane.margin>
       </BorderPane>
    </right>
+   <bottom>
+      <Button fx:id="btnResolucao" mnemonicParsing="false" onAction="#irTelaResolucao" text="Ver Resolução" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="25.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
