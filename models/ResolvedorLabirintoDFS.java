@@ -29,7 +29,7 @@ public class ResolvedorLabirintoDFS extends ResolvedorLabirinto {
 
     // Encontra a saída do labirinto.
     public boolean temCaminhoParaSaida() {
-        int inicio = 0;
+        int inicio = 2;
         int fim = (labirinto.obterAltura() - 1) * labirinto.obterLargura() + labirinto.obterLargura() - 1;
         return DFS(inicio, fim);
     }
