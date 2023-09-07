@@ -1,5 +1,8 @@
 package gui;
 
+import javafx.geometry.Pos;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
 import models.Labirinto;
 
 import javafx.event.ActionEvent;
@@ -26,6 +29,8 @@ public class TelaEdicaoLabirintoController {
     Stage stage;
     Scene scene;
 
+    private boolean modoEdicao = false;
+
     @FXML
     private Button btnEditar;
 
@@ -41,26 +46,83 @@ public class TelaEdicaoLabirintoController {
 
         criarLabirintoVisual(labirinto.obterLabirinto());
     }
+
     @FXML
     public void criarLabirintoVisual(int[][] matrizLabirinto) {
+        gridLabirinto.setHgap(5);
+        gridLabirinto.setVgap(5);
+        gridLabirinto.setAlignment(Pos.CENTER);
+
+        for (int i = 0; i < matrizLabirinto[0].length; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPrefWidth(10);
+            gridLabirinto.getColumnConstraints().add(colConst);
+        }
+
+        for (int i = 0; i < matrizLabirinto.length; i++) {
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setPrefHeight(30);
+            gridLabirinto.getRowConstraints().add(rowConst);
+        }
+
         for (int y = 0; y < matrizLabirinto.length; y++) {
             for (int x = 0; x < matrizLabirinto[y].length; x++) {
                 ImageView imageView = new ImageView();
+                imageView.setFitWidth(10);
+                imageView.setFitHeight(15);
 
                 if (matrizLabirinto[y][x] == 0) {
                     imageView.setImage(new Image("caminho5.jpg"));
-                } else {
+
+                } else if (matrizLabirinto[y][x] == 1){
                     imageView.setImage(new Image("parede5.jpg"));
+
+                } else if (matrizLabirinto[y][x] == 2) {
+                    imageView.setImage(new Image("entrada4.jpg"));
+
+                } else if (matrizLabirinto[y][x] == 3) {
+                    imageView.setImage(new Image("saida4.jpg"));
+
                 }
 
                 gridLabirinto.add(imageView, x, y);
+
+                int finalY = y;
+                int finalX = x;
+                imageView.setOnMouseClicked(e -> {
+                    if (!modoEdicao) return;
+
+                    int currentValue = matrizLabirinto[finalY][finalX];
+                    switch (currentValue) {
+                        case 0:
+                            imageView.setImage(new Image("parede5.jpg"));
+                            matrizLabirinto[finalY][finalX] = 1;
+                            break;
+                        case 1:
+                            imageView.setImage(new Image("caminho5.jpg"));
+                            matrizLabirinto[finalY][finalX] = 0;
+                            break;
+                        case 2, 3:
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Aviso");
+                            alert.setHeaderText(null);
+                            alert.setContentText("A entrada e saída do labirinto não podem ser alteradas.");
+                            alert.showAndWait();
+                            break;
+                    }
+                });
             }
         }
     }
 
     @FXML
     void editarLabirinto(ActionEvent event) {
-
+        modoEdicao = !modoEdicao;
+        if (modoEdicao) {
+            btnEditar.setText("Parar Edição");
+        } else {
+            btnEditar.setText("Editar Labirinto");
+        }
     }
 
     @FXML
