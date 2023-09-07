@@ -102,12 +102,11 @@ public class TelaJogadorController {
 
         if (result.isPresent() && result.get() == bfsButton) {
             ResolvedorLabirintoBFS resolvedorBFS = new ResolvedorLabirintoBFS(labirinto);
-            
+
 
         } else if (result.isPresent() && result.get() == dfsButton) {
             ResolvedorLabirintoDFS resolvedorDFS = new ResolvedorLabirintoDFS(labirinto);
-
-
+            caminhoResolucao = resolvedorDFS.getCaminhoParaSaida();
         }
 
         if (caminhoResolucao != null) {
@@ -115,7 +114,7 @@ public class TelaJogadorController {
                 int y = vertice / labirinto.obterLargura();
                 int x = vertice % labirinto.obterLargura();
                 ImageView imageView = (ImageView) gridLabirintoEditado.getChildren().get(y * labirinto.obterLargura() + x);
-                //imageView.setImage(new Image("resolucaoCaminho.jpg"));  // imagem representando o caminho de resolução
+                imageView.setImage(new Image("trilha.jpg"));
             }
         }
     }
