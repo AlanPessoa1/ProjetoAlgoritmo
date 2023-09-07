@@ -32,7 +32,7 @@ public class ResolvedorLabirintoBFS extends ResolvedorLabirinto {
 
     // Encontra a saída do labirinto usando BFS.
     public boolean temCaminhoParaSaida() {
-        int inicio = 0;
+        int inicio = 2;
         int fim = (labirinto.obterAltura() - 1) * labirinto.obterLargura() + labirinto.obterLargura() - 1;
         return BFS(inicio, fim);
     }
