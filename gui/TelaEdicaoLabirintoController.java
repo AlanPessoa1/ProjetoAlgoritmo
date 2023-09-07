@@ -127,8 +127,8 @@ public class TelaEdicaoLabirintoController {
 
     @FXML
     void irTelaLabirinto(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("CONFIRMAÇÃO");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Aviso");
         alert.setHeaderText("Se você mudar de tela, não será possível retornar para a tela de edição.");
 
         ButtonType novoBotao = new ButtonType("CANCELAR", ButtonBar.ButtonData.OK_DONE);
