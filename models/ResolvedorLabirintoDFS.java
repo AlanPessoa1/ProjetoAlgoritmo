@@ -1,6 +1,10 @@
 package models;
 
+import java.util.LinkedList;
+
 public class ResolvedorLabirintoDFS extends ResolvedorLabirinto {
+
+    private LinkedList<Integer> caminho = new LinkedList<>();
     public ResolvedorLabirintoDFS(Labirinto labirinto) {
         super(labirinto);
     }
@@ -14,17 +18,30 @@ public class ResolvedorLabirintoDFS extends ResolvedorLabirinto {
 
     // Método recursivo utilizado pelo DFS.
     private boolean DFSUtil(int vertice, int fim, boolean[] visitados) {
-        if (vertice == fim) return true;
+        if (vertice == fim) {
+            caminho.add(vertice);
+            return true;
+        }
 
         visitados[vertice] = true;
 
-        for (int adj : grafo.getAdjVertices(vertice)) {  // Note que mudamos aqui
+        for (int adj : grafo.getAdjVertices(vertice)) {
             if (!visitados[adj]) {
-                if (DFSUtil(adj, fim, visitados)) return true;
+                if (DFSUtil(adj, fim, visitados)) {
+                    caminho.add(vertice);
+                    return true;
+                }
             }
         }
 
         return false;
+    }
+
+    public LinkedList<Integer> getCaminhoParaSaida() {
+        if (temCaminhoParaSaida()) {
+            return caminho;
+        }
+        return null;
     }
 
     // Encontra a saída do labirinto.
