@@ -40,12 +40,12 @@ public class Labirinto {
             linha = linhas.get(y);
             for (int x = 0; x < largura; x++) {
                 char currentChar = linha.charAt(x);
-                if (currentChar == 'E') {
+                if (currentChar == 2) {
                     entrada = toSingleIndex(y, x);
-                    matrizLabirinto[y][x] = 0; // trata 'E' como caminho
-                } else if (currentChar == 'S') {
+                    matrizLabirinto[y][x] = 2;
+                } else if (currentChar == 3) {
                     saida = toSingleIndex(y, x);
-                    matrizLabirinto[y][x] = 0; // trata 'S' como caminho
+                    matrizLabirinto[y][x] = 3;
                 } else {
                     matrizLabirinto[y][x] = Character.getNumericValue(currentChar);
                 }
