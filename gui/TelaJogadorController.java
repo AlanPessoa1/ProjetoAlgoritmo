@@ -23,7 +23,6 @@ import models.ResolvedorLabirintoDFS;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -106,6 +105,11 @@ public class TelaJogadorController {
             ResolvedorLabirintoBFS resolvedorBFS = new ResolvedorLabirintoBFS(labirinto);
             if (resolvedorBFS.temCaminhoParaSaida()) {
                 caminhoResolucao = resolvedorBFS.obterCaminho();
+            } else {
+                System.out.println("Labirinto não tem caminho.");
+                System.out.println(labirinto.obterEntrada());
+                System.out.println(labirinto.vizinhosConectados(labirinto.obterEntrada()));
+                System.out.println(labirinto.vizinhosConectados(labirinto.obterSaida()));
             }
         } else if (result.isPresent() && result.get() == dfsButton) {
             ResolvedorLabirintoDFS resolvedorDFS = new ResolvedorLabirintoDFS(labirinto);
