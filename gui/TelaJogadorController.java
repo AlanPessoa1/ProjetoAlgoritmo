@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import models.ResolvedorLabirintoBFS;
 import models.ResolvedorLabirintoDFS;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -98,24 +100,34 @@ public class TelaJogadorController {
 
         Optional<ButtonType> result = alert.showAndWait();
         Labirinto labirinto = new Labirinto(TelaEdicaoLabirintoController.getInstancia().getMatrizLabirintoEditado());
-        List<Integer> caminhoResolucao = null;
+        LinkedList<Integer> caminhoResolucao = null;
 
         if (result.isPresent() && result.get() == bfsButton) {
             ResolvedorLabirintoBFS resolvedorBFS = new ResolvedorLabirintoBFS(labirinto);
-
-
+            if (resolvedorBFS.temCaminhoParaSaida()) {
+                caminhoResolucao = resolvedorBFS.obterCaminho();
+            }
         } else if (result.isPresent() && result.get() == dfsButton) {
             ResolvedorLabirintoDFS resolvedorDFS = new ResolvedorLabirintoDFS(labirinto);
-            caminhoResolucao = resolvedorDFS.getCaminhoParaSaida();
+            if (resolvedorDFS.temCaminhoParaSaida()) {
+                caminhoResolucao = resolvedorDFS.getCaminhoParaSaida();
+            } else {
+                System.out.println("Labirinto não tem caminho.");
+                System.out.println(labirinto.obterEntrada());
+                System.out.println(labirinto.vizinhosConectados(labirinto.obterEntrada()));
+                System.out.println(labirinto.vizinhosConectados(labirinto.obterSaida()));
+            }
         }
-
         if (caminhoResolucao != null) {
             for (Integer vertice : caminhoResolucao) {
                 int y = vertice / labirinto.obterLargura();
                 int x = vertice % labirinto.obterLargura();
-                ImageView imageView = (ImageView) gridLabirintoEditado.getChildren().get(y * labirinto.obterLargura() + x);
-                imageView.setImage(new Image("trilha.jpg"));
+                Platform.runLater(() -> {
+                    ImageView imageView = (ImageView) gridLabirintoEditado.getChildren().get(y * labirinto.obterLargura() + x);
+                    imageView.setImage(new Image("trilha.jpg"));
+                });
             }
+            gridLabirintoEditado.requestLayout();
         }
     }
 
