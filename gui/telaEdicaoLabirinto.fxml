@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEdicaoLabirintoController">
+    <top>
+        <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <bottom>
+                        <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editarLabirinto" text="Editar Labirinto" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets bottom="15.0" />
+                            </BorderPane.margin>
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </bottom>
+                    <center>
+                        <Button fx:id="btnProximaTela2" mnemonicParsing="false" onAction="#irTelaLabirinto" text="Próximo" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <BorderPane.margin>
+                                <Insets bottom="45.0" />
+                            </BorderPane.margin>
+                        </Button>
+                    </center>
+                </BorderPane>
+            </children>
+        </StackPane>
+    </top>
+    <center>
+        <GridPane fx:id="gridLabirinto" BorderPane.alignment="CENTER">
+        </GridPane>
+    </center>
+</BorderPane>
